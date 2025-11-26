@@ -6,98 +6,173 @@
     <title> Chatbot por Voz</title>
 </head>
 <body>
-
 <style>
+    .celular {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #9fabca;
+        text-align: center;
+        margin-bottom: 10px;
+        padding: 20px;
+        width: 260px;
+        height: 500px;
+        border: 6px solid #ffffff;
+        border-radius: 50px;
+        position: relative;
+        box-shadow: 0px 0px 55px -1px rgba(0,25,89,0.75);
+        -webkit-box-shadow: 0px 0px 55px -1px rgba(0,25,89,0.75);
+        -moz-box-shadow: 0px 0px 55px -1px rgba(0,25,89,0.75);
+    }
+
+    .camera {
+        width: 60px;
+        height: 10px;
+        background: #ffffff;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+
+    .tela {
+        background: #f4f4f4;
+        width: 100%;
+        height: calc(100% - 80px);
+        border-radius: 5px;
+        padding: 15px;
+        overflow-y: auto;
+    }
+
+    .botao-home {
+        height: 20px;
+        width: 60px;
+        background: #ffffff;
+        border-radius: 30px;
+        position: absolute;
+        bottom: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     body {
-        background: #dcf742;
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         height: 100vh;
+        background-image: linear-gradient(rgba(20, 56, 133, 0.5), rgba(20, 56, 133, 0.5)) ,url("assets/fundoEnfermagem.jpeg");
+        background-size: cover;      
+        background-position: center;
     }
 
-    div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: white;
+    #chatBot{
+        width: 240px;
+        border: 1px solid rgb(160, 160, 160);
         border-radius: 10px;
-        text-align: center;
-        border: 1px solid #575656;
-        margin-bottom: 10px;
-        padding: 20px;
     }
 
-    h2 {
-        margin-bottom: 20px;
-        color: #333;
-        font-weight: 700;
+    .barra-topo {
+        width: 100%;
+        position: relative;
+        height: 20px;
+    }
+
+    .bateria {
+        position: absolute;
+        right: -5px;
+        top: -10px;
+        width: 28px; 
+    }
+
+    #respostaTexto{
+        margin-top: 20px;
         text-align: center;
-        margin-left: 10px;
-        margin-right: 10px;
+
     }
 
     button {
-        background: #a0af18;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 10px;
-        font-size: 16px;
+        border-radius: 20px;
+        border: 0px;
+        padding: 10px;
+        background: #001959;
+        color: #ffffff;
+        margin-top: 10px;
         cursor: pointer;
-        transition: 0.2s;
-        margin-bottom: 10px;
+        transition: background 0.3s ease;
     }
 
-    button:hover {
-        background: #5b6408;                                                                                                                                   
+    button:hover{
+        background-color: #010c29;
     }
+    
 
-    button:active {
-        transform: scale(0.97);
-    }
 </style>
+<div class="celular">
+    <div class="camera"></div>
 
-    <div class="chatbox">
-        <h2> Chatbot por Voz</h2>
-        <button onclick="ouvir()">Falar Agora</button>
+    <div class="tela">
+        <div class="barra-topo">
+            <img src="assets/bateria.png" class="bateria">
+        </div>
+
+        <img id="chatBot" src="assets/chatBot.png">
+        <button onclick="ouvir()">Falar Agora</button>      
+        <div id="respostaTexto"></div>
+
     </div>
 
-    <script>
+    <div class="botao-home"></div>
+</div>
 
-     const pergunta = [ "qual o seu nome","como você está","o que você faz","quem te criou",];
+<script> 
+    const pergunta = [
+    "principais",
+    "contexto",
+    "adolescente",
+    "cuidado",
+    "importante",
+    ];         
 
-     const resposta = ["Meu nome é Jarvis.","Estou ótimo, obrigado por perguntar!","Eu sou um chatbot criado para te ajudar.","Fui criado pela Ester, a melhor programadora!",];
+    const resposta = [
+    "Uma das principais atribuições é a realização de procedimentos técnicos como a verificação de sinais vitais (pressão arterial, temperatura, pulso), peso e altura da gestante, além de auxiliar o enfermeiro ou médico na coleta de material para exames laboratoriais e na organização do ambiente para a consulta. O técnico também é fundamental na orientação sobre a importância da adesão ao pré-natal e na identificação de sinais de risco que necessitem de intervenção imediata do enfermeiro.",
+    " O Técnico em Enfermagem atua na educação em saúde, realizando acolhimento e orientações sobre a importância do autocuidado, da alimentação saudável, da prática de exercícios físicos e da cessação do tabagismo. Especificamente em relação ao câncer de próstata, o técnico deve desmistificar preconceitos e incentivar a busca ativa por exames preventivos (como o toque retal e o PSA) a partir da idade recomendada, conforme o protocolo da unidade de saúde.",
+    " O acolhimento ao adolescente deve ser realizado em um ambiente de privacidade e sigilo, respeitando sua individualidade e autonomia. O técnico deve utilizar uma linguagem clara e acessível, demonstrando escuta ativa e livre de julgamentos. É crucial garantir que o adolescente se sinta à vontade para expressar suas dúvidas e necessidades, que podem incluir questões sobre sexualidade, uso de substâncias, saúde mental e violência.",
+    "O cuidado essencial é a preparação da paciente e do material para a coleta do exame citopatológico (Papanicolau). Isso inclui orientar a mulher sobre o procedimento, garantir sua privacidade, posicioná-la corretamente na mesa ginecológica e auxiliar o profissional responsável (geralmente o enfermeiro) na entrega dos materiais estéreis e na identificação correta das lâminas, assegurando a qualidade da amostra.",
+    "A atuação do técnico é vital na redução da incidência de ISTs. Ele é responsável pela distribuição correta de preservativos (masculino e feminino) e pela orientação sobre o uso adequado, além de fornecer informações básicas sobre as formas de transmissão, sintomas e a importância do diagnóstico e tratamento precoces. Essa ação educativa e de distribuição de insumos é uma das principais estratégias de prevenção na Atenção Primária.",
+    ];
 
     function falar(texto) {
-        const discurso = new SpeechSynthesisUtterance(texto);
-        discurso.lang = "pt-BR";
-        discurso.rate = 2;
-        window.speechSynthesis.speak(discurso);
+    const discurso = new SpeechSynthesisUtterance(texto);
+    discurso.lang = "pt-BR";
+    discurso.rate = 1.5;
+    window.speechSynthesis.speak(discurso);
+    document.getElementById("respostaTexto").innerText = texto;
     }
 
     function ouvir() {
-        const reconhecer = new webkitSpeechRecognition();
-        reconhecer.lang = "pt-BR";
-        reconhecer.start();
+    const reconhecer = new webkitSpeechRecognition();
+    reconhecer.lang = "pt-BR";
+    reconhecer.start();
 
-        reconhecer.onresult = function(event) {
-            const textoFalado = event.results[0][0].transcript.toLowerCase();
+    reconhecer.onresult = function(event) {
+        const textoFalado = event.results[0][0].transcript.toLowerCase();
 
 
-            for (let i = 0; i < pergunta.length; i++) {
-                if (textoFalado.includes(pergunta[i])) {
-                    falar(resposta[i]);
-                    return;
-                }
+        for (let i = 0; i < pergunta.length; i++) {
+            if (textoFalado.includes(pergunta[i])) {
+                falar(resposta[i]);
+                return;
             }
+        }
 
-            falar("Desculpe, não entendi.");
-            
-        };
+        falar("Desculpe, não entendi.");
+        
+    };
     }
 
 </script>
+
+</body>
+</html>
